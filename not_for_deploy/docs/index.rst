@@ -1,6 +1,6 @@
-##########################
+###############################
 ievv_opensource's documentation
-##########################
+###############################
 
 
 ********
@@ -12,7 +12,6 @@ Contents
 
    django/index
    develop/index
-   deploy/index
 
 
 
