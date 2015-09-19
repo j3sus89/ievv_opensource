@@ -11,7 +11,7 @@ sphinx-rtd-theme==0.1.7
 sphinxcontrib-napoleon==0.3.3
 
 # Easier to work with databases during development
-#django_dbdev==0.9.4
+django_dbdev==0.9.6
 sh==1.11
 
 # Better Django shell and other utils for development

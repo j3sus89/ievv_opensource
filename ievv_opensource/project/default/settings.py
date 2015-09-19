@@ -39,7 +39,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'django.contrib.admin',
     'crispy_forms',
-    'ievv_opensource.ievv_opensource_core',
+    'ievv_opensource.ievv_tagframework',
 )
 
 MIDDLEWARE_CLASSES = [
