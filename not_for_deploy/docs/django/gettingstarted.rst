@@ -31,7 +31,7 @@ You will also have to add gettext to your path if you want to be able to update 
 
 
 Install the system packages on Ubuntu
-================================================
+=====================================
 ::
 
     $ sudo apt-get install libjpeg62-dev zlib1g-dev libfreetype6-dev liblcms1-dev gettext nodejs
@@ -76,7 +76,7 @@ Build the docs
 :ref:`Enable the virtualenv <enable-virtualenv>`, and run::
 
     $ cd not_for_deploy/docs/
-    $ fab docs
+    $ inv docs
 
 Then open ``_build/index.html`` in a browser.
 

@@ -5,5 +5,6 @@ psycopg2==2.6
 dj-database-url==0.3.0
 dj-static==0.0.6
 django-storages-redux==1.2.3
+invoke==0.10.1
 
 -e .
