@@ -20,3 +20,4 @@ Django apps
 .. toctree::
    :maxdepth: 2
    
+   ievv_tagframework
