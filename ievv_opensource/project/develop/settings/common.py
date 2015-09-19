@@ -11,7 +11,6 @@ ROOT_URLCONF = 'ievv_opensource.project.develop.urls'
 
 INSTALLED_APPS = list(INSTALLED_APPS) + [
     'django_dbdev',
-    'django_extensions',
 ]
 
 
