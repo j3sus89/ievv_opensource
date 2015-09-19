@@ -1,0 +1,32 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# 
+# Translators:
+# Tor Ivar Johansen <tor@appresso.no>, 2015
+msgid ""
+msgstr ""
+"Project-Id-Version: Ievv Open Source\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-19 20:36+0000\n"
+"PO-Revision-Date: 2015-09-19 20:49+0000\n"
+"Last-Translator: Tor Ivar Johansen <tor@appresso.no>\n"
+"Language-Team: Norwegian Bokmål (http://www.transifex.com/appresso/ievv-open-source/language/nb/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nb\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: ievv_opensource/ievv_tagframework/models.py:14
+#: ievv_opensource/ievv_tagframework/models.py:19
+msgid "Tag"
+msgstr "Tag"
+
+#: ievv_opensource/ievv_tagframework/models.py:15
+msgid "Tags"
+msgstr "Tags"
+
+#: ievv_opensource/ievv_tagframework/models.py:22
+msgid "Maximum 30 characters."
+msgstr "Maksimalt 30 tegn"
