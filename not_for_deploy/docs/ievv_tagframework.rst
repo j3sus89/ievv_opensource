@@ -9,7 +9,7 @@ for Django apps.
 Data model API
 **************
 
-.. currentmodule:: ievv_opensource.ievv_tagframework
+.. currentmodule:: ievv_opensource.ievv_tagframework.models
 
-.. automodule:: ievv_opensource.ievv_tagframework
+.. automodule:: ievv_opensource.ievv_tagframework.models
     :members:
