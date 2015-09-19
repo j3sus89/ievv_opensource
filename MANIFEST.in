@@ -1,0 +1,14 @@
+include README.md
+recursive-include ievv_opensource *.po
+recursive-include ievv_opensource *.mo
+recursive-include ievv_opensource *.js
+recursive-include ievv_opensource *.css
+recursive-include ievv_opensource *.html
+recursive-include ievv_opensource *.txt
+recursive-include ievv_opensource *.png
+recursive-include ievv_opensource *.gif
+recursive-include ievv_opensource *.json
+recursive-include ievv_opensource *.woff
+recursive-include ievv_opensource *.woff2
+recursive-include ievv_opensource *.svg
+recursive-include ievv_opensource *.otf

@@ -1,3 +1,5 @@
+from django.contrib.contenttypes.fields import GenericForeignKey
+from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
@@ -29,6 +31,21 @@ class Tag(models.Model):
     )
 
 
-# class TaggedItem(models.Model):
-#     tag = models.ForeignKey(Tag)
-#     object_id = models.Posi
+class TaggedItem(models.Model):
+    """
+    Represents a many-to-many relationship between any data model object and
+    a :class:`.Tag`.
+    """
+    #: The :class:`.Tag`.
+    tag = models.ForeignKey(Tag)
+
+    #: The ContentType of the tagged object.
+    content_type = models.ForeignKey(ContentType)
+
+    #: The ID of the tagged object.
+    object_id = models.PositiveIntegerField()
+
+    #: The GenericForeignKey using :obj:`~TaggedItem.content_type` and
+    #: :obj:`~TaggedItem.object_id` to create a generic foreign key
+    #: to the tagged object.
+    content_object = GenericForeignKey('content_type', 'object_id')
