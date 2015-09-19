@@ -21,9 +21,9 @@ How to add a new file to the documenation
   ``docs/<subdirectory>/index.rst``
 
 
-*****************************************
+************************
 Language and file naming
-*****************************************
+************************
 - Write everything in English.
 - Use english lowercase letters and no spaces to name the ``.rst``-files. Use ``-`` or ``_`` instead of spaces.
 

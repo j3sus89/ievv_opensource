@@ -1,24 +1,34 @@
-###############################
-ievv_opensource's documentation
-###############################
+###############
+ievv_opensource
+###############
 
 
-********
-Contents
-********
+******
+Guides
+******
+.. toctree::
+   :maxdepth: 2
+   
+   gettingstarted
+   development
+
+
+***********
+Django apps
+***********
 
 .. toctree::
-   :maxdepth: 1
-
-   django/index
-   develop/index
-
+   :maxdepth: 2
+   
+   ievv_tagframework
 
 
-******************
-Indices and tables
-******************
+*******************************
+Contributing to ievv_opensource
+*******************************
 
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+.. toctree::
+   :maxdepth: 2
+
+   docs
+   git

@@ -47,7 +47,6 @@ Create a virtualenv using Python 3 (an isolated Python environment)::
 
 Install the development requirements::
 
-    $ cd djangoproject/
     $ pip install -r requirements/develop.txt
 
 
@@ -64,10 +63,9 @@ Install the development requirements::
 *****************
 Create a database
 *****************
-See :doc:`databasedumps`.
+::
 
-
-
+    $ inv recreate_devdb
 
 
 **************
