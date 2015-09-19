@@ -37,3 +37,5 @@ model-mommy==1.2.4
 # For translations
 transifex-client==0.11b3
 
+# Pull inn development packages from GIT
+-r develop.gitpackages.txt
