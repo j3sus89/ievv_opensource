@@ -11,8 +11,6 @@ Guides
    
    gettingstarted
    development
-   theme
-   databasedumps
 
 
 ***********
