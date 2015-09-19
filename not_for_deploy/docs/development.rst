@@ -22,16 +22,6 @@ Run::
 to start the Django development server.
 
 
-***********************************************
-Run the Django development server with Postgres
-***********************************************
-Run::
-
-    $ DJANGOENV=postgres_develop python manage.py runserver
-
-to start the Django development server.
-
-
 *************
 Running tests
 *************
