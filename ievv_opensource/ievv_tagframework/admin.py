@@ -1,17 +1,32 @@
 from django.contrib import admin
+from ievv_opensource.ievv_tagframework.models import Tag, TaggedObject
 
-#from .models import User
+
+class TagAdmin(admin.ModelAdmin):
+    list_display = [
+        'id', 'taglabel', 'tagtype'
+    ]
+    list_filter = [
+        'tagtype'
+    ]
+    fields = [
+        'taglabel',
+        'tagtype',
+    ]
+
+admin.site.register(Tag, TagAdmin)
 
 
-#class UserAdmin(admin.ModelAdmin):
-    #list_display = ('email', 'fullname')
-    #list_filter = ('is_active', 'is_admin')
-    #fields = [
-        #'fullname',
-        #'email',
-        #'is_active',
-        #'is_admin',
-    #]
+class TaggedObjectAdmin(admin.ModelAdmin):
+    list_display = [
+        'id', 'taglabel', 'tagtype'
+    ]
+    list_filter = [
+        'tagtype'
+    ]
+    fields = [
+        'taglabel',
+        'tagtype',
+    ]
 
-#admin.site.register(User, UserAdmin)
-
+admin.site.register(TaggedObject, TaggedObjectAdmin)

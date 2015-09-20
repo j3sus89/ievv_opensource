@@ -2,6 +2,7 @@ import json
 import os
 from setuptools import setup, find_packages
 
+
 with open(os.path.join(os.path.dirname(__file__), 'ievv_opensource', 'version.json')) as f:
     version = json.loads(f.read())
 

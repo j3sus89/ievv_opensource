@@ -23,6 +23,16 @@ Django apps
    ievv_tagframework
 
 
+********
+Settings
+********
+
+.. toctree::
+   :maxdepth: 2
+
+   projectspecific_settings
+
+
 *******************************
 Contributing to ievv_opensource
 *******************************

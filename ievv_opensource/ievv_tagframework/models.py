@@ -1,14 +1,19 @@
+from django.conf import settings
 from django.contrib.contenttypes.fields import GenericForeignKey
 from django.contrib.contenttypes.models import ContentType
 from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 
+def _get_tagtype_choices():
+    return settings.IEVV_TAGFRAMEWORK_TAGTYPE_CHOICES
+
+
 class Tag(models.Model):
     """
     A single tag.
 
-    A tag has a unique name, and data models is added to a tag via :class:`.TaggedItem`.
+    A tag has a unique name, and data models is added to a tag via :class:`.TaggedObject`.
     """
     class Meta:
         verbose_name = _('Tag')
@@ -24,18 +29,26 @@ class Tag(models.Model):
 
     #: The tagtype is a way for applications to group tags by type.
     #: No logic is assigned to this field by default, other than
-    #: that is is ``db_indexed``.
+    #: that is is ``db_indexed``. The valid choices for the field
+    #: is configured via the
+    #: :obj:`~ievv_opensource.project.default.projectspecific_settings.IEVV_TAGFRAMEWORK_TAGTYPE_CHOICES`
+    #: setting.
     tagtype = models.CharField(
         max_length=255,
-        db_index=True
+        db_index=True,
+        choices=_get_tagtype_choices
     )
 
 
-class TaggedItem(models.Model):
+class TaggedObject(models.Model):
     """
     Represents a many-to-many relationship between any data model object and
     a :class:`.Tag`.
     """
+    class Meta:
+        verbose_name = _('Tagged object')
+        verbose_name_plural = _('Tagged objects')
+
     #: The :class:`.Tag`.
     tag = models.ForeignKey(Tag)
 
@@ -45,7 +58,7 @@ class TaggedItem(models.Model):
     #: The ID of the tagged object.
     object_id = models.PositiveIntegerField()
 
-    #: The GenericForeignKey using :obj:`~TaggedItem.content_type` and
-    #: :obj:`~TaggedItem.object_id` to create a generic foreign key
+    #: The GenericForeignKey using :obj:`~TaggedObject.content_type` and
+    #: :obj:`~TaggedObject.object_id` to create a generic foreign key
     #: to the tagged object.
     content_object = GenericForeignKey('content_type', 'object_id')

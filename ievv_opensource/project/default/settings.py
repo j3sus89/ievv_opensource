@@ -9,8 +9,7 @@ https://docs.djangoproject.com/en/1.6/ref/settings/
 """
 from os.path import join
 from os.path import dirname
-import os
-
+from ievv_opensource.project.default.projectspecific_settings import *  # noqa
 
 REPOROOT_DIR = dirname(dirname(dirname(dirname(__file__))))
 
@@ -111,4 +110,3 @@ TEMPLATE_CONTEXT_PROCESSORS = [
     "django.core.context_processors.request",
     "django.contrib.messages.context_processors.messages",
 ]
-
