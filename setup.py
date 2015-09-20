@@ -1,10 +1,15 @@
+import json
+import os
 from setuptools import setup, find_packages
+
+with open(os.path.join(os.path.dirname(__file__), 'ievv_opensource', 'version.json')) as f:
+    version = json.loads(f.read())
 
 
 setup(
     name='ievv_opensource',
     description='The opensource modules from the commercial IEVV Django framework.',
-    version='1.0',
+    version=version,
     author='Espen Angell Kristiansen, Tor Johansen, Magne Westlie',
     author_email='post@appresso.no',
     license='BSD',

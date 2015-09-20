@@ -42,9 +42,8 @@ def recreate_devdb(djangoenv='develop'):
     Recreate the test database.
     """
     resetdb(djangoenv)
-    with shell_env(DJANGOENV=djangoenv, IEVV_ELASTICSEARCH_DO_NOT_REGISTER_INDEX_UPDATE_TRIGGERS='true'):
+    with shell_env(DJANGOENV=djangoenv):
         _manage('loaddata {}'.format(DUMPDATA_DATAFILE))
-        _manage('ievv_elasticsearch_rebuild_index ALL')
 
 
 @task
