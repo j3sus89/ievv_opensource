@@ -1,10 +1,7 @@
-import os
-import shutil
-from os.path import exists, join
-import textwrap
+from os.path import join
+
 from invoke import task, run
 from invoke_extras.context_managers import shell_env
-
 
 DUMPDATA_DATAFILE = join(
     'ievv_opensource', 'project', 'develop', 'dumps', 'dev', 'data.json')
@@ -23,7 +20,6 @@ def migrate(djangoenv='develop'):
     """
     with shell_env(DJANGOENV=djangoenv):
         _manage('migrate --noinput')
-
 
 
 @task
