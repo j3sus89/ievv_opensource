@@ -14,8 +14,17 @@ setup(
     author='Espen Angell Kristiansen, Tor Johansen, Magne Westlie',
     author_email='post@appresso.no',
     license='BSD',
-    packages=find_packages(exclude=['manage', 'tasks']),
-    install_requires=[],
+    packages=find_packages(exclude=['manage']),
+    install_requires=[
+        'sh',
+        'Django',
+        'django_dbdev',
+    ],
+    entry_points={
+        'console_scripts': [
+            'ievv = ievv_opensource.ievvtasks_common.cli:cli',
+        ],
+    },
     include_package_data=True,
     zip_safe=False,
     classifiers=[

@@ -1,0 +1,9 @@
+[run]
+source = ievv_opensource
+
+[report]
+omit =
+    ievv_opensource/ievvtasks_common/open_file.py
+    ievv_opensource/ievvtasks_common/cli.py
+    ievv_opensource/ievvtasks_development/management/commands/appressotasks_recreate_devdb.py
+    */demo/*

@@ -28,3 +28,5 @@ node_modules/
 # Ignore user-specific pycharm settings
 .idea/workspace.xml
 .idea/tasks.xml
+
+/django_media_root/

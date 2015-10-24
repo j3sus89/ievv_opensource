@@ -1,26 +1,25 @@
-###############
-ievv_opensource
-###############
+#############################
+ievvtasks's documentation
+#############################
 
 
-******
-Guides
-******
+*******
+Install
+*******
+
+::
+
+   $ pip install ievv_opensource
+
+
+***********
+Development
+***********
 .. toctree::
    :maxdepth: 2
-   
-   gettingstarted
+
    development
-
-
-***********
-Django apps
-***********
-
-.. toctree::
-   :maxdepth: 2
-   
-   ievv_tagframework
+   the_ievv_command
 
 
 ********
@@ -30,15 +29,13 @@ Settings
 .. toctree::
    :maxdepth: 2
 
-   projectspecific_settings
+   settings
 
 
-*******************************
-Contributing to ievv_opensource
-*******************************
+******************
+Indices and tables
+******************
 
-.. toctree::
-   :maxdepth: 2
-
-   docs
-   git
+* :ref:`genindex`
+* :ref:`modindex`
+* :ref:`search`

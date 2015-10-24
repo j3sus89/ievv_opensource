@@ -5,8 +5,8 @@ from django.db import models
 from django.utils.translation import ugettext_lazy as _
 
 
-def _get_tagtype_choices():
-    return settings.IEVV_TAGFRAMEWORK_TAGTYPE_CHOICES
+# def get_tagtype_choices():
+#     return settings.IEVV_TAGFRAMEWORK_TAGTYPE_CHOICES
 
 
 class Tag(models.Model):
@@ -36,7 +36,7 @@ class Tag(models.Model):
     tagtype = models.CharField(
         max_length=255,
         db_index=True,
-        choices=_get_tagtype_choices
+        # choices=get_tagtype_choices
     )
 
 

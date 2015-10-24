@@ -19,14 +19,13 @@ admin.site.register(Tag, TagAdmin)
 
 class TaggedObjectAdmin(admin.ModelAdmin):
     list_display = [
-        'id', 'taglabel', 'tagtype'
+        'id', 'tag', 'content_object'
     ]
     list_filter = [
-        'tagtype'
+        'tag__tagtype'
     ]
     fields = [
-        'taglabel',
-        'tagtype',
+        'tag',
     ]
 
 admin.site.register(TaggedObject, TaggedObjectAdmin)
