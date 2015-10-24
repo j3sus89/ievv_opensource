@@ -30,3 +30,7 @@ node_modules/
 .idea/tasks.xml
 
 /django_media_root/
+
+# coverage.py
+/.coverage
+/htmlcov/
