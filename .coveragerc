@@ -5,5 +5,6 @@ source = ievv_opensource
 omit =
     ievv_opensource/ievvtasks_common/open_file.py
     ievv_opensource/ievvtasks_common/cli.py
-    ievv_opensource/ievvtasks_development/management/commands/appressotasks_recreate_devdb.py
+    ievv_opensource/ievv_tagframework/admin.py
+    ievv_opensource/ievvtasks_development/management/commands/ievvtasks_recreate_devdb.py
     */demo/*
