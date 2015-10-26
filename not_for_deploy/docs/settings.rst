@@ -10,7 +10,7 @@ ievvtasks_dump_db_as_json
 .. setting:: IEVVTASKS_DUMPDATA_DIRECTORY
 
 IEVVTASKS_DUMPDATA_DIRECTORY
-================================
+============================
 The directory where we put dumps created by the ``ievvtasks_dump_db_as_json``
 management command. Typically, you put something like this in your develop settings::
 
@@ -22,7 +22,7 @@ management command. Typically, you put something like this in your develop setti
 .. setting:: IEVVTASKS_DUMPDATA_ADD_EXCLUDES
 
 IEVVTASKS_DUMPDATA_ADD_EXCLUDES
-===================================
+===============================
 Use this setting to add models and apps to exclude from the dumped json. We exclude:
 
 - contenttypes
@@ -45,7 +45,7 @@ Example::
 .. setting:: IEVVTASKS_DUMPDATA_EXCLUDES
 
 IEVVTASKS_DUMPDATA_EXCLUDES
-===============================
+===========================
 If you do not want to get the default excludes, you can use this instead of
 :setting:`IEVVTASKS_DUMPDATA_ADD_EXCLUDES` to specify exactly what to
 exclude.
@@ -59,7 +59,7 @@ ievvtasks_makemessages
 .. setting:: IEVVTASKS_MAKEMESSAGES_LANGUAGE_CODES
 
 IEVVTASKS_MAKEMESSAGES_LANGUAGE_CODES
-=========================================
+=====================================
 The languages to build translations for. Example::
 
     IEVVTASKS_MAKEMESSAGES_LANGUAGE_CODES = ['en', 'nb']
@@ -68,7 +68,7 @@ The languages to build translations for. Example::
 .. setting:: IEVVTASKS_MAKEMESSAGES_IGNORE
 
 IEVVTASKS_MAKEMESSAGES_IGNORE
-=================================
+=============================
 The patterns to ignore when making translations. Defaults to::
 
     IEVVTASKS_MAKEMESSAGES_IGNORE = [
