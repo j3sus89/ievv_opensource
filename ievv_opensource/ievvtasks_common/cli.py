@@ -3,8 +3,8 @@ import logging
 import os
 import sys
 
-from sh import Command
 import shutil
+import sh
 from ievv_opensource.ievvtasks_common.open_file import open_file_with_default_os_opener
 
 
@@ -51,7 +51,7 @@ def _build_docs(unknown_args):
     if args.cleandocs:
         _cleandocs([])
 
-    sphinx_build_html = Command('sphinx-build')
+    sphinx_build_html = sh.Command('sphinx-build')
     sphinx_build_html(documentation_directory, documentation_build_directory,
                       b='html')
     logger.info('Built docs. Open %s in your browser to view them.',
@@ -59,6 +59,21 @@ def _build_docs(unknown_args):
 
     if args.opendocs:
         _opendocs([])
+
+
+def _find_management_commands():
+    commands = []
+    try:
+        pythoncommand = sh.Command('python')
+    except sh.CommandNotFound:
+        pass
+    else:
+        output = pythoncommand('manage.py', '--help')
+        for line in output.split():
+            line = line.strip()
+            if line.startswith('ievvtasks_'):
+                commands.append(line[len('ievvtasks_'):])
+    return commands
 
 
 def cli():
@@ -69,20 +84,19 @@ def cli():
         # If we do not use this, we can not add help for the sub commands.
         add_help=len(args) <= 1)
 
+    commands = _find_management_commands()
+    commands.extend([
+        'docs',
+        'opendocs',
+        'cleandocs',
+    ])
+    commands = list(set(commands))
+    commands.sort()
+
     parser.add_argument('command', type=str,
                         help='The command to run. Use ``ievv <command> --help`` for '
                              'help with a specific command.',
-                        choices=[
-                            # 'createproject',
-                            'docs',
-                            'opendocs',
-                            'cleandocs',
-                            'recreate_devdb',
-                            'remove_sorl_cache',
-                            'dump_db_as_json',
-                            'makemessages',
-                            'compilemessages',
-                        ])
+                        choices=commands)
     args, unknown_args = parser.parse_known_args()
 
     if args.command == 'docs':
