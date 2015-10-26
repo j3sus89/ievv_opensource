@@ -6,4 +6,4 @@
 #    $ pip install -r requirements/develop.gitpackages.txt --force-reinstall
 #
 #
--e git://github.com/appressoas/invoke_extras.git#egg=invoke_extras
+#-e git://github.com/appressoas/invoke_extras.git#egg=invoke_extras
