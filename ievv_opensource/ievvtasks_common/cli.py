@@ -4,6 +4,7 @@ import os
 import sys
 
 import shutil
+import textwrap
 import sh
 from ievv_opensource.ievvtasks_common.open_file import open_file_with_default_os_opener
 
@@ -76,14 +77,15 @@ def _find_management_commands():
     return commands
 
 
-def cli():
-    args = sys.argv[1:]
-    parser = argparse.ArgumentParser(
-        description='IEVV command line interface.',
-        # Do not include help unless we just run ``ievv --help`` or ``ievv``.
-        # If we do not use this, we can not add help for the sub commands.
-        add_help=len(args) <= 1)
+def _make_cli_epilog(commands):
+    cli_help = """
+    Available commands:
+      {}
+    """.format('\n      '.join(commands))
+    return cli_help
 
+
+def cli():
     commands = _find_management_commands()
     commands.extend([
         'docs',
@@ -93,9 +95,20 @@ def cli():
     commands = list(set(commands))
     commands.sort()
 
+    args = sys.argv[1:]
+    parser = argparse.ArgumentParser(
+        description='IEVV command line interface.',
+        epilog=textwrap.dedent(_make_cli_epilog(commands)),
+        formatter_class=argparse.RawDescriptionHelpFormatter,
+        # Do not include help unless we just run ``ievv --help`` or ``ievv``.
+        # If we do not use this, we can not add help for the sub commands.
+        add_help=len(args) <= 1)
+
     parser.add_argument('command', type=str,
+                        metavar='command',
                         help='The command to run. Use ``ievv <command> --help`` for '
-                             'help with a specific command.',
+                             'help with a specific command. The available commands '
+                             'is listed in the "Available commands" section below.',
                         choices=commands)
     args, unknown_args = parser.parse_known_args()
 
