@@ -53,8 +53,9 @@ def _build_docs(unknown_args):
         _cleandocs([])
 
     sphinx_build_html = sh.Command('sphinx-build')
-    sphinx_build_html(documentation_directory, documentation_build_directory,
-                      b='html')
+    output = sphinx_build_html(documentation_directory, documentation_build_directory,
+                               b='html')
+    print(output)
     logger.info('Built docs. Open %s in your browser to view them.',
                 documentation_indexhtml)
 
