@@ -6,7 +6,7 @@ from django.core import management
 from django.test import TestCase
 
 
-class TestMakemessages(TestCase):
+class TestCompilemessages(TestCase):
     def __remove_locale_directory(self):
         if os.path.exists(self.locale_directory):
             shutil.rmtree(self.locale_directory)
@@ -19,17 +19,12 @@ class TestMakemessages(TestCase):
     def tearDown(self):
         self.__remove_locale_directory()
 
-    def test_locale_directory_created(self):
-        self.assertFalse(os.path.exists(self.locale_directory))
-        with self.settings(LOCALE_PATHS=self.locale_paths):
-            management.call_command('ievvtasks_makemessages')
-        self.assertTrue(os.path.exists(self.locale_directory))
-
-    def test_po_file_created(self):
-        po_file_path = os.path.join(self.locale_directory,
-                                    'en', 'LC_MESSAGES', 'django.po')
-        self.assertFalse(os.path.exists(po_file_path))
+    def test_mo_file_created(self):
+        mo_file_path = os.path.join(self.locale_directory,
+                                    'en', 'LC_MESSAGES', 'django.mo')
+        self.assertFalse(os.path.exists(mo_file_path))
         with self.settings(IEVVTASKS_MAKEMESSAGES_LANGUAGE_CODES=['en']):
             management.call_command('ievvtasks_makemessages')
+            management.call_command('ievvtasks_compilemessages')
         self.assertTrue(os.path.exists(self.locale_directory))
-        self.assertTrue(os.path.exists(po_file_path))
+        self.assertTrue(os.path.exists(mo_file_path))

@@ -77,6 +77,27 @@ The patterns to ignore when making translations. Defaults to::
 
 
 
+**************
+ievvtasks_docs
+**************
+
+
+.. setting:: IEVVTASKS_DOCS_DIRECTORY
+
+IEVVTASKS_DOCS_DIRECTORY
+========================
+The directory where your sphinx docs resides (the directory where you have your sphinx ``conf.py``).
+Defaults to ``not_for_deploy/docs/``.
+
+.. setting:: IEVVTASKS_DOCS_BUILD_DIRECTORY
+
+IEVVTASKS_DOCS_BUILD_DIRECTORY
+==============================
+The directory where your sphinx docs should be built.
+Defaults to ``not_for_deploy/docs/_build``.
+
+
+
 *****************
 ievv_tagframework
 *****************
