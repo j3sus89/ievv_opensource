@@ -8,5 +8,6 @@ django-storages-redux==1.2.3
 invoke==0.10.1
 sh==1.11
 sorl-thumbnail==12.3
+watchdog==0.8.3
 
 -e .

@@ -19,6 +19,7 @@ setup(
         'sh',
         'Django',
         'django_dbdev',
+        'watchdog',
     ],
     entry_points={
         'console_scripts': [
