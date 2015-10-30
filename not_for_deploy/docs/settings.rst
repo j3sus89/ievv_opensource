@@ -98,6 +98,24 @@ Defaults to ``not_for_deploy/docs/_build``.
 
 
 
+************************
+ievvtasks_recreate_devdb
+************************
+
+.. setting:: IEVVTASKS_RECREATE_DEVDB_POST_MANAGEMENT_COMMANDS
+
+IEVVTASKS_RECREATE_DEVDB_POST_MANAGEMENT_COMMANDS
+=================================================
+Iterable of managemement commands to after creating/restoring and migrating the
+database in ``ievv recreate_devdb``. Example::
+
+    IEVVTASKS_RECREATE_DEVDB_POST_MANAGEMENT_COMMANDS = [
+        'createsuperuser',
+        'ievvtasks_set_all_passwords_to_test',
+    ]
+
+
+
 *****************
 ievv_tagframework
 *****************

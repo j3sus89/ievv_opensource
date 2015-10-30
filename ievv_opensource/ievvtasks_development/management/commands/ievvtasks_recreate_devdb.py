@@ -1,4 +1,5 @@
 import os
+from django.conf import settings
 from django.core import management
 from django.core.management.base import BaseCommand
 
@@ -19,3 +20,7 @@ class Command(BaseCommand):
             self.stdout.write('Loading data from {}.'.format(dumpdatafile))
             management.call_command('dbdev_loaddump', dumpdatafile)
         management.call_command('migrate')
+        post_management_commands = getattr(settings, 'IEVVTASKS_RECREATE_DEVDB_POST_MANAGEMENT_COMMANDS', [])
+        for management_command in post_management_commands:
+            management.call_command(management_command)
+
