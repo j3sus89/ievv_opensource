@@ -23,4 +23,3 @@ class Command(BaseCommand):
         post_management_commands = getattr(settings, 'IEVVTASKS_RECREATE_DEVDB_POST_MANAGEMENT_COMMANDS', [])
         for management_command in post_management_commands:
             management.call_command(management_command)
-
