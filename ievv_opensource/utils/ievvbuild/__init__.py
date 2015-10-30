@@ -1,4 +1,4 @@
-import config  # noqa
-import lessbuild  # noqa
+from . import config  # noqa
+from . import lessbuild  # noqa
 
 __all__ = ['config', 'lessbuild']
