@@ -1,8 +1,27 @@
+import logging
 import os
 from django.apps import apps
 
 
-class App(object):
+class BuildLoggable(object):
+    def get_logger_name(self):
+        raise NotImplementedError()
+
+    def get_logger(self):
+        return logging.getLogger(self.get_logger_name())
+
+
+class Installer(BuildLoggable):
+    name = None
+
+    def __init__(self, app):
+        self.app = app
+
+    def get_logger_name(self):
+        return '{}.{}'.format(self.app.get_logger_name(), self.name)
+
+
+class App(BuildLoggable):
     def __init__(self, appname, *plugins, sourcefolder='staticsources'):
         """
         Parameters:
@@ -16,19 +35,22 @@ class App(object):
         self.apps = None
         self.appname = appname
         self.sourcefolder = sourcefolder
+        self.installers = {}
         self.plugins = []
         for plugin in plugins:
             self.add_plugin(plugin)
 
     def add_plugin(self, plugin):
+        plugin.app = self
         self.plugins.append(plugin)
 
     def run(self):
         for plugin in self.plugins:
-            try:
-                plugin.run()
-            except NotImplementedError:
-                pass
+            plugin.run()
+
+    def install(self):
+        for plugin in self.plugins:
+            plugin.install()
 
     def get_app_config(self):
         """
@@ -69,16 +91,32 @@ class App(object):
         #     except NotImplementedError:
         #         pass
 
+    # def get_buildfolder(self):
+    #     return os.path.join(self.apps.buildfolder, self.appname)
 
-class Apps(object):
+    def get_installer(self, installerclass):
+        if installerclass.name not in self.installers:
+            installer = installerclass(app=self)
+            self.installers[installerclass.name] = installer
+        return self.installers[installerclass.name]
+
+    def get_logger_name(self):
+        return '{}.{}'.format(self.apps.get_logger_name(), self.appname)
+
+
+class Apps(BuildLoggable):
     def __init__(self, *apps):
         self.apps = []
         for app in apps:
             self.add_app(app)
 
     def add_app(self, app):
-        app.apps = app
-        self.apps[app.name] = app
+        app.apps = self
+        self.apps.append(app)
+
+    def install(self):
+        for app in self.apps:
+            app.install()
 
     def run(self):
         for app in self.apps:
@@ -87,3 +125,16 @@ class Apps(object):
     def watch(self):
         for app in self.apps:
             app.watch()
+
+    def get_logger_name(self):
+        return 'ievvbuild'
+
+    def configure_logging(self, loglevel=logging.INFO):
+        formatter = logging.Formatter('[%(name)s:%(levelname)s] %(message)s')
+        handler = logging.StreamHandler()
+        handler.setFormatter(formatter)
+        logger = self.get_logger()
+        handler.setLevel(loglevel)
+        logger.setLevel(loglevel)
+        logger.addHandler(handler)
+        logger.propagate = False

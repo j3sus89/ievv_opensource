@@ -9,9 +9,10 @@ IEVVTASKS_DUMPDATA_DIRECTORY = os.path.join(THIS_DIR, 'dumps')
 IEVVTASKS_BUILD_APPS = ievvbuild.config.Apps(
     ievvbuild.config.App(
         'superapp',
-        # NpmInstall(),
+        # ievvbuild.npminstall.Plugin(),
         # BowerInstall(),
         ievvbuild.lessbuild.Plugin(),
+        # ievvbuild.clessbuild.Plugin(),
         # ievvbuild.lessbuild.Plugin(sourcefolder='less/themes/default'),
         # ievvbuild.lessbuild.Plugin(sourcefolder='less/themes/dark'),
         # ievvbuild.lessbuild.Plugin(sourcefolder='less/themes/red'),
