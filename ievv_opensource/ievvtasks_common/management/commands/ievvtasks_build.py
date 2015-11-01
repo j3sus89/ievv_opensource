@@ -93,3 +93,4 @@ class Command(BaseCommand):
     def handle(self, *args, **options):
         settings.IEVVTASKS_BUILD_APPS.configure_logging()
         settings.IEVVTASKS_BUILD_APPS.install()
+        settings.IEVVTASKS_BUILD_APPS.run()

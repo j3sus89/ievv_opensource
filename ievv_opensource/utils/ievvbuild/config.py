@@ -22,7 +22,9 @@ class Installer(BuildLoggable):
 
 
 class App(BuildLoggable):
-    def __init__(self, appname, *plugins, sourcefolder='staticsources'):
+    def __init__(self, appname, version, plugins,
+                 sourcefolder='staticsources',
+                 destinationfolder='static'):
         """
         Parameters:
             appname: Django app label (I.E.: ``myproject.myapp``).
@@ -33,8 +35,10 @@ class App(BuildLoggable):
                 Defaults to ``staticsources``.
         """
         self.apps = None
+        self.version = version
         self.appname = appname
         self.sourcefolder = sourcefolder
+        self.destinationfolder = destinationfolder
         self.installers = {}
         self.plugins = []
         for plugin in plugins:
@@ -51,13 +55,15 @@ class App(BuildLoggable):
     def install(self):
         for plugin in self.plugins:
             plugin.install()
+        for installer in self.installers.values():
+            installer.install()
 
     def get_app_config(self):
         """
         Get the AppConfig for the Django app.
         """
         if not hasattr(self, '_app_config'):
-            self._app_config = apps.get_app_config('admin')
+            self._app_config = apps.get_app_config(self.appname)
         return self._app_config
 
     def get_appfolder(self):
@@ -66,18 +72,39 @@ class App(BuildLoggable):
         """
         return self.get_app_config().path
 
-    def build_app_path(self, apprelative_path):
+    def get_app_path(self, apprelative_path):
         """
         Returns the path to the directory joined with the
         given ``apprelative_path``.
         """
         return os.path.join(self.get_appfolder(), apprelative_path)
 
-    def build_source_path(self, sourcefolder_relative_path):
+    def get_source_path(self, *sourcefolder_relative_path):
         """
-        Returns a path built by joining the Django app root directory
-        with the ``sourcefolder`` provided to ``__init__``, the
+        Returns the absolute path to a folder within the source
+        folder.
         """
+        sourcefolder = os.path.join(self.get_app_path(self.sourcefolder), self.appname)
+        if sourcefolder_relative_path:
+            return os.path.join(sourcefolder, *sourcefolder_relative_path)
+        else:
+            return sourcefolder
+
+    def get_destination_path(self, *sourcefolder_relative_path, new_extension=None):
+        """
+        Returns the absolute path to a folder within the destination
+        folder.
+        """
+        destinationfolder = os.path.join(
+            self.get_app_path(self.destinationfolder), self.appname, self.version)
+        if sourcefolder_relative_path:
+            path = os.path.join(destinationfolder, *sourcefolder_relative_path)
+            if new_extension:
+                path, extension = os.path.splitext(path)
+                path = path + new_extension
+                return path
+        else:
+            return destinationfolder
 
     def watch(self):
         """
@@ -133,8 +160,14 @@ class Apps(BuildLoggable):
         formatter = logging.Formatter('[%(name)s:%(levelname)s] %(message)s')
         handler = logging.StreamHandler()
         handler.setFormatter(formatter)
-        logger = self.get_logger()
         handler.setLevel(loglevel)
+
+        logger = self.get_logger()
         logger.setLevel(loglevel)
         logger.addHandler(handler)
         logger.propagate = False
+
+        shlogger = logging.getLogger('sh.command')
+        shlogger.setLevel(loglevel)
+        shlogger.addHandler(handler)
+        shlogger.propagate = False
