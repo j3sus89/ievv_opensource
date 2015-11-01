@@ -98,6 +98,36 @@ Defaults to ``not_for_deploy/docs/_build``.
 
 
 
+************************
+ievvtasks_recreate_devdb
+************************
+
+.. setting:: IEVVTASKS_RECREATE_DEVDB_POST_MANAGEMENT_COMMANDS
+
+IEVVTASKS_RECREATE_DEVDB_POST_MANAGEMENT_COMMANDS
+=================================================
+Iterable of managemement commands to after creating/restoring and migrating the
+database in ``ievv recreate_devdb``. Example::
+
+    IEVVTASKS_RECREATE_DEVDB_POST_MANAGEMENT_COMMANDS = [
+        {
+            'name': 'createsuperuser',
+            'args': ['test@example.com'],
+            'options': {'verbosity': 3}
+        },
+        'ievvtasks_set_all_passwords_to_test',
+    ]
+
+The items in the iterable can be one of:
+
+- A string with the name of a management command (for commands without any
+  arguments or options).
+- A dict with ``name``, ``args``, and ``options`` keys. The
+  ``name`` key is required, but ``args`` and ``options`` are
+  optional. ``args`` and ``options`` is just forwarded to
+  ``django.core.management.call_command``.
+
+
 *****************
 ievv_tagframework
 *****************

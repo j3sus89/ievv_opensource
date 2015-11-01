@@ -1,4 +1,5 @@
 import os
+from django.conf import settings
 from django.core import management
 from django.core.management.base import BaseCommand
 
@@ -18,4 +19,19 @@ class Command(BaseCommand):
         if os.path.exists(dumpdatafile):
             self.stdout.write('Loading data from {}.'.format(dumpdatafile))
             management.call_command('dbdev_loaddump', dumpdatafile)
+        self.stdout.write('Running management command: migrate.')
         management.call_command('migrate')
+        post_management_commands = getattr(settings, 'IEVVTASKS_RECREATE_DEVDB_POST_MANAGEMENT_COMMANDS', [])
+        for management_command in post_management_commands:
+            if isinstance(management_command, dict):
+                args = management_command.get('args', [])
+                options = management_command.get('options', {})
+                management_command = management_command['name']
+            else:
+                args = []
+                options = {}
+            self.stdout.write(
+                'Running management command: {} with '
+                'args={!r} and options={!r}.'.format(
+                    management_command, args, options))
+            management.call_command(management_command, *args, **options)
