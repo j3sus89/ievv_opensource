@@ -1,4 +1,4 @@
-from ievv_opensource.utils.ievvbuild.config import BuildLoggable
+from ievv_opensource.utils.ievvbuild.buildloggable import BuildLoggable
 
 
 class Plugin(BuildLoggable):

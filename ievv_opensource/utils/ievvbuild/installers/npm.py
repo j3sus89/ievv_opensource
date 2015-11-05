@@ -1,10 +1,9 @@
 import json
 import sh
+from ievv_opensource.utils.ievvbuild.installers.base import AbstractInstaller
 
-from ievv_opensource.utils.ievvbuild import config
 
-
-class NpmInstaller(config.Installer):
+class NpmInstaller(AbstractInstaller):
     name = 'npminstall'
 
     def __init__(self, *args, **kwargs):
@@ -53,8 +52,7 @@ class NpmInstaller(config.Installer):
     def install(self):
         self.get_logger().info('Installing %s', self.app.appname)
         self.create_packagejson()
-        npm = sh.Command('npm')
-        npm('install', _cwd=self.app.get_source_path())
+        self.execute('npm', 'install', _cwd=self.app.get_source_path())
 
     def find_executable(self, executablename):
         """

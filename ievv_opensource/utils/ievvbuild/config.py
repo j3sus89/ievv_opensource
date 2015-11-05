@@ -1,24 +1,9 @@
 import logging
 import os
+
 from django.apps import apps
 
-
-class BuildLoggable(object):
-    def get_logger_name(self):
-        raise NotImplementedError()
-
-    def get_logger(self):
-        return logging.getLogger(self.get_logger_name())
-
-
-class Installer(BuildLoggable):
-    name = None
-
-    def __init__(self, app):
-        self.app = app
-
-    def get_logger_name(self):
-        return '{}.{}'.format(self.app.get_logger_name(), self.name)
+from ievv_opensource.utils.ievvbuild.buildloggable import BuildLoggable
 
 
 class App(BuildLoggable):
@@ -156,18 +141,25 @@ class Apps(BuildLoggable):
     def get_logger_name(self):
         return 'ievvbuild'
 
-    def configure_logging(self, loglevel=logging.INFO):
-        formatter = logging.Formatter('[%(name)s:%(levelname)s] %(message)s')
-        handler = logging.StreamHandler()
-        handler.setFormatter(formatter)
-        handler.setLevel(loglevel)
+    def __configure_shlogger(self, loglevel, handler):
+        shlogger = logging.getLogger('sh.command')
+        shlogger.setLevel(loglevel)
+        shlogger.addHandler(handler)
+        shlogger.propagate = False
 
+    def __configure_ievvbuild_logger(self, loglevel, handler):
         logger = self.get_logger()
         logger.setLevel(loglevel)
         logger.addHandler(handler)
         logger.propagate = False
 
-        shlogger = logging.getLogger('sh.command')
-        shlogger.setLevel(loglevel)
-        shlogger.addHandler(handler)
-        shlogger.propagate = False
+    def configure_logging(self, loglevel=logging.INFO,
+                          shlibrary_loglevel=logging.WARNING):
+        formatter = logging.Formatter('[%(name)s:%(levelname)s] %(message)s')
+        handler = logging.StreamHandler()
+        handler.setFormatter(formatter)
+        handler.setLevel(loglevel)
+        self.__configure_ievvbuild_logger(loglevel=loglevel,
+                                          handler=handler)
+        self.__configure_shlogger(loglevel=shlibrary_loglevel,
+                                  handler=handler)
