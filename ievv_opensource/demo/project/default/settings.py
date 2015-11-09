@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'ievv_opensource.ievvtasks_common',
     'ievv_opensource.ievvtasks_development',
     'ievv_opensource.ievvtasks_production',
+    'ievv_opensource.ievv_eventframework',
 ]
 
 MIDDLEWARE_CLASSES = (
