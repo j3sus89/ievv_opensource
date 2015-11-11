@@ -2,9 +2,9 @@ import datetime
 
 from django.test import TestCase
 from model_mommy import mommy
-from django.db import IntegrityError, OperationalError
-
+from django.db import IntegrityError
 from ievv_opensource.ievv_eventframework.models import Event
+from ievv_opensource.ievv_eventframework.myextension import MyExtension
 
 
 class TestEventModel(TestCase):
@@ -54,4 +54,23 @@ class TestEventModel(TestCase):
         self.assertEqual(event.start_datetime, datetime.datetime.combine(datetime.date(2016, 12, 22),
                                                                          datetime.time(15, 32)))
 
-    ### What about the tests when the create function fails? Talk to Magne about this
+    ### What about the tests when the create function fails?
+
+    def test_add_event_ok(self):
+        textarea = """#Liverpool VS Madrid
+        12.11.15
+        18:00
+        @The local pub
+        <http://www.thelocalpub.no>
+
+        Come see the match of the year.
+        """
+        event = mommy.make(Event).add_event(textarea)
+        self.assertEqual(event.title, "Liverpool VS Madrid")
+        self.assertEqual(event.description, "Come see the match of the year.")
+        self.assertEqual(event.location, "The local pub")
+        self.assertEqual(event.website, "http://www.thelocalpub.no")
+        self.assertEqual(event.start_datetime, datetime.datetime.combine(datetime.date(2015, 11, 15),
+                                                                         datetime.time(18, 00)))
+        # I think, this test fails because the test framework does not load MyExtension,
+        # the class that extends markdown functionality
