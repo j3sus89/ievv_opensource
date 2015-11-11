@@ -51,9 +51,9 @@ class Event(models.Model):
         This functions gets the data from the text string and makes an event.
         """
         parsed_text_area = markdown.markdown(text_area, entensions=[MyExtension()])
-        print(parsed_text_area)
+        print("After: "+parsed_text_area)
         parsed_html = BeautifulSoup(parsed_text_area, "html.parser")
-        print("LO QUE DEVUELVE: "+str(parsed_html))
+        print("Before: "+str(parsed_html))
         ev = Event.create(parsed_html.find('h1').text,
                           parsed_html.find_all('p')[1].text,
                           parsed_html.find('date').text,
